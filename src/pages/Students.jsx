@@ -179,7 +179,7 @@ const Students = () => {
                 {/* Header */}
                 <div className="flex justify-between items-center">
                     <div>
-                        <h1 className="text-2xl p-4 pb-0 font-bold text-gray-900">
+                        <h1 className="text-2xl p-4  font-bold text-gray-900">
                             All Students
                         </h1>
                     </div>
@@ -240,7 +240,7 @@ const Students = () => {
                 {/* Table */}
                 <div className="overflow-x-auto bg-white ">
                     <table className="w-full overflow-auto ">
-                        <thead className="border-b border-gray-200">
+                        <thead className="">
                             <tr>
                                 <th className="px-6 py-3 text-left">
                                     <input
@@ -323,7 +323,7 @@ const Students = () => {
                                         </span>
                                     </td>
                                     <td className="px-6 py-4 text-sm text-gray-500">
-                                        {student.username}
+                                        @{student.username}
                                     </td>
                                     <td className="px-6 py-4 text-right">
                                         <button
