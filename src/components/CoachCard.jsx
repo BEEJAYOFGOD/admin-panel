@@ -4,14 +4,16 @@ import Modal from "./modal";
 import CoachesStudent from "./CoachesStudent";
 
 const CoachCard = ({ coach }) => {
+    // a use State for opening of modal
     const [modalOpen, setModalOpen] = useState(false);
 
+    // a close function to close the modal
     const closeModal = () => {
         setModalOpen(false);
     };
 
     return (
-        <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md pb-8 transition-shadow">
             {/* Header with more options */}
             <div className="flex justify-between items-center mb-3">
                 <button className="text-gray-400 hover:text-gray-600">

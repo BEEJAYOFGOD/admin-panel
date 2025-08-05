@@ -49,7 +49,7 @@ const Dashboard = () => {
     };
 
     return (
-        <section className=" p-8 bg-gray-200/40 min-h-full  ">
+        <section className=" p-8 bg-outlet/30 min-h-full  ">
             <div className="flex h-fit w-full justify-between ">
                 <h2>Dashboard</h2>
                 <div>
