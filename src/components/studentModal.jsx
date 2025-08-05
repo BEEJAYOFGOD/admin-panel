@@ -9,8 +9,9 @@ export const StudentModal = ({ isOpen, onClose, student, onSave }) => {
     const [formData, setFormData] = useState({
         name: "",
         username: "",
-        status: "Active",
+        status: student.status,
         schoolName: "",
+        coach: student.coach,
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -188,7 +189,7 @@ export const StudentModal = ({ isOpen, onClose, student, onSave }) => {
         >
             <div
                 ref={modalRef}
-                className="relative bg-white rounded-xl shadow-2xl mx-4 min-w-3xl max-w-md   max-h-[90vh] overflow-hidden"
+                className="relative bg-white rounded-md shadow-2xl mx-4 min-w-3xl max-w-md   max-h-[90vh] overflow-hidden"
                 onClick={(e) => e.stopPropagation()}
                 onKeyDown={handleKeyDown}
                 tabIndex={-1}
@@ -200,7 +201,7 @@ export const StudentModal = ({ isOpen, onClose, student, onSave }) => {
                         className="text-xl font-semibold text-gray-900 flex items-center gap-2"
                     >
                         <svg
-                            className="w-8 h-8 text-blue-600"
+                            className="w-8 h-8 text-blue-950"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -238,7 +239,7 @@ export const StudentModal = ({ isOpen, onClose, student, onSave }) => {
                 {/* Form */}
                 <div className="p-6 space-y-4 overflow-y-auto max-h-[calc(90vh-140px)]">
                     {/* Full Name */}
-                    <div>
+                    <div className="flex flex-col gap-2">
                         <label
                             htmlFor="name"
                             className="block font-medium text-gray-700 mb-1"
@@ -251,7 +252,7 @@ export const StudentModal = ({ isOpen, onClose, student, onSave }) => {
                             id="name"
                             value={formData.name}
                             onChange={handleInputChange}
-                            className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
+                            className={`w-full px-6 py-3 text-lg border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
                                 errors.name
                                     ? "border-red-300 bg-red-50"
                                     : "border-gray-300"
@@ -265,32 +266,36 @@ export const StudentModal = ({ isOpen, onClose, student, onSave }) => {
                         )}
                     </div>
 
-                    {/* Username */}
-                    <div>
+                    {/* School Name */}
+                    <div className="flex flex-col gap-2">
                         <label
-                            htmlFor="username"
-                            className="block  font-medium text-gray-700 mb-1"
+                            htmlFor="schoolName"
+                            className="font-medium text-gray-700 mb-1 flex items-center gap-1"
                         >
-                            Username *
+                            <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                                />
+                            </svg>
+                            School Name
                         </label>
                         <input
                             type="text"
-                            name="username"
-                            id="username"
-                            value={formData.username}
+                            name="schoolName"
+                            id="schoolName"
+                            value={formData.schoolName}
                             onChange={handleInputChange}
-                            className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${
-                                errors.username
-                                    ? "border-red-300 bg-red-50"
-                                    : "border-gray-300"
-                            }`}
-                            placeholder="Enter username"
+                            className="w-full px-6 py-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                            placeholder="Enter school name"
                         />
-                        {errors.username && (
-                            <p className="text-red-600 text-sm mt-1">
-                                {errors.username}
-                            </p>
-                        )}
                     </div>
 
                     {/* Status */}
@@ -320,36 +325,36 @@ export const StudentModal = ({ isOpen, onClose, student, onSave }) => {
                         </div>
                     </div>
 
-                    {/* School Name */}
-                    <div>
-                        <label
-                            htmlFor="schoolName"
-                            className="text-sm font-medium text-gray-700 mb-1 flex items-center gap-1"
-                        >
-                            <svg
-                                className="w-4 h-4"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
+                    <div className="flex justify-between">
+                        <label htmlFor="studentCoach">Student Coach</label>
+
+                        <div>
+                            <select
+                                name="coach"
+                                id="coach"
+                                className="border border-blue-900 rounded-md text-xl"
+                                onChange={(e) => {
+                                    setFormData({
+                                        ...formData,
+                                        coach: e.target.value,
+                                    });
+                                }}
+                                value={formData.coach}
                             >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                                />
-                            </svg>
-                            School Name
-                        </label>
-                        <input
-                            type="text"
-                            name="schoolName"
-                            id="schoolName"
-                            value={formData.schoolName}
-                            onChange={handleInputChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                            placeholder="Enter school name"
-                        />
+                                <option
+                                    value="Dr. Dave Benson"
+                                    className="text-xl bg-blue-950 text-white"
+                                >
+                                    Dr. Dave Benson
+                                </option>
+                                <option
+                                    value="Dr. Manuel Beo"
+                                    className="text-xl bg-blue-950 text-white hover:bg-none"
+                                >
+                                    Dr. Manuel Beo
+                                </option>
+                            </select>
+                        </div>
                     </div>
 
                     {/* Submit Error */}
@@ -376,7 +381,7 @@ export const StudentModal = ({ isOpen, onClose, student, onSave }) => {
                         type="submit"
                         onClick={handleSubmit}
                         disabled={isLoading}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors min-w-[80px] flex items-center justify-center"
+                        className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors min-w-[80px] flex items-center justify-center"
                     >
                         {isLoading ? (
                             <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

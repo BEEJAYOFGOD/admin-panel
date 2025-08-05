@@ -15,6 +15,7 @@ const Students = () => {
             joinDate: "2023-09-15",
             avatar: "CO",
             schoolName: "fitjoy",
+            coach: "Dr. Dave Benson",
         },
         {
             id: 2,
@@ -26,6 +27,7 @@ const Students = () => {
             joinDate: "2023-08-22",
             avatar: "AO",
             schoolName: "fitjoy",
+            coach: "Dr. Manuel Beo",
         },
         {
             id: 3,
@@ -37,6 +39,7 @@ const Students = () => {
             joinDate: "2023-10-01",
             avatar: "KN",
             schoolName: "fitjoy",
+            coach: "Dr. Dave Benson",
         },
         {
             id: 4,
@@ -48,6 +51,7 @@ const Students = () => {
             joinDate: "2023-10-15",
             avatar: "FA",
             schoolName: "fitjoy",
+            coach: "Dr. Manuel Beo",
         },
         {
             id: 5,
@@ -59,6 +63,7 @@ const Students = () => {
             joinDate: "2023-07-10",
             avatar: "IM",
             schoolName: "fitjoy",
+            coach: "Dr. Dave Benson",
         },
         {
             id: 6,
@@ -70,6 +75,7 @@ const Students = () => {
             joinDate: "2023-09-05",
             avatar: "GO",
             schoolName: "fitjoy",
+            coach: "Dr. Manuel Beo",
         },
         {
             id: 7,
@@ -81,6 +87,7 @@ const Students = () => {
             joinDate: "2023-06-18",
             avatar: "TB",
             schoolName: "fitjoy",
+            coach: "Dr. Dave Benson",
         },
         {
             id: 8,
@@ -92,6 +99,7 @@ const Students = () => {
             joinDate: "2023-08-30",
             avatar: "BC",
             schoolName: "fitjoy",
+            coach: "Dr. Manuel Beo",
         },
     ]);
 
