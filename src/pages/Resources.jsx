@@ -10,8 +10,11 @@ import {
     Shield,
     Check,
 } from "lucide-react";
+import { useState } from "react";
 
 const Resources = () => {
+    const [indexState, setIndexState] = useState(0);
+
     const categories = [
         {
             name: "Student Resources",
@@ -33,15 +36,74 @@ const Resources = () => {
     ];
 
     const resources = [
-        {
-            title: "Math4Success",
-            content: "Is offering FREE Online Math Courses For The Community",
-        },
-        {
-            title: "READ ALOUD VIDEOS FOR CHILDREN",
-            content:
-                "Collection of videos on google drive to read for children",
-        },
+        [
+            {
+                title: "Math4Success",
+                content:
+                    "Is offering FREE Online Math Courses For The Community",
+            },
+            {
+                title: "READ ALOUD VIDEOS FOR CHILDREN",
+                content:
+                    "Collection of videos on google drive to read for children",
+            },
+        ],
+
+        [
+            {
+                title: "City of Detroit",
+                content: "Several resources for all",
+            },
+        ],
+
+        [
+            {
+                title: "Wayne Metro",
+                content:
+                    "Cares Relief and Recovery Services, Utilities, Funeral Assistance, Bills Etc.",
+            },
+        ],
+
+        [
+            {
+                title: "Novocare",
+                content:
+                    "Free Insulin for diabetics. People applying for the program must have a valid presentation for Novo Nordisk insulin",
+            },
+            {
+                title: "Wayne State School of Social Work",
+                content:
+                    "A list of links for Resources including mental and physical health etc.",
+            },
+        ],
+
+        [
+            {
+                title: "Humanity Outreach",
+                content:
+                    "will house and care for youth that is in secure foster care system due to abuse and or neglect",
+            },
+            {
+                title: "Community Housing network",
+                content:
+                    "provides housing and housing resources. They are offering a free foreclosure prevention webinars during the COVID-19 pandemic ",
+            },
+        ],
+
+        [
+            {
+                title: "Inner City Youth Group",
+                content:
+                    "Follow them on Facebook and check out their website for updates on resources",
+            },
+            {
+                title: "YMCA ",
+                content:
+                    "Provide FREE grab and go meals for children and young meals for children and young adults; enough for days . on mondays and fridays or Tuesdays and Fridays ",
+            },
+        ],
+
+        [],
     ];
     return (
         <div className="min-h-screen bg-gray-50 px-12 py-8">
@@ -56,8 +118,9 @@ const Resources = () => {
                 <div
                     className={`w-80 bg-white border-gray-200 rounded-md flex flex-col  px-4`}
                 >
-                    {categories.map((category) => (
+                    {categories.map((category, index) => (
                         <div
+                            onClick={() => setIndexState(index)}
                             key={category.name}
                             className={`flex items-center justify-between  last:border-0  border-b border-gray-400/20  cursor-pointer py-4 mb-2`}
                         >
@@ -65,10 +128,14 @@ const Resources = () => {
                                 <div
                                     className={`rounded-md p-3 bg-blue-400/30 flex items-center justify-center`}
                                 >
-                                    <category.icon
-                                        size={20}
-                                        className="text-blue-950/80"
-                                    />
+                                    {index === indexState ? (
+                                        <Check size={20} />
+                                    ) : (
+                                        <category.icon
+                                            size={20}
+                                            className="text-blue-950/80"
+                                        />
+                                    )}
                                 </div>
                                 <span className={`font-medium `}>
                                     {category.name}
@@ -97,41 +164,55 @@ const Resources = () => {
                         </div>
 
                         {/* Table Header */}
-                        <div className="grid grid-cols-12 gap-4 p-4 bg-gray-50 border-b border-gray-200 text-sm font-medium text-gray-600">
-                            <div className="col-span-3">Title</div>
-                            <div className="col-span-7">Content</div>
-                            <div className="col-span-2">Actions</div>
-                        </div>
+                        {resources[indexState].length ? (
+                            <div className="grid grid-cols-10 gap-4 p-4 bg-blue-200 border-b border-gray-200 text-sm font-medium text-blue-900">
+                                <div className="col-span-3">Title</div>
+                                <div className="col-span-6">Content</div>
+                                <div className="col-span-1">Actions</div>
+                            </div>
+                        ) : null}
 
                         {/* Table Rows */}
                         <div className="divide-y divide-gray-200">
-                            {resources.map((resource, index) => (
-                                <div
-                                    key={index}
-                                    className="grid grid-cols-12 gap-4 p-4 hover:bg-gray-50"
-                                >
-                                    <div className="col-span-3">
-                                        <span className="font-medium text-gray-900">
-                                            {resource.title}
-                                        </span>
-                                    </div>
-                                    <div className="col-span-7">
-                                        <span className="text-gray-600">
-                                            {resource.content}
-                                        </span>
-                                    </div>
-                                    <div className="col-span-2">
-                                        <div className="flex space-x-2">
-                                            <button className="p-2 text-red-500 hover:bg-red-50 rounded-md">
-                                                <ExternalLink size={16} />
-                                            </button>
-                                            <button className="p-2 text-teal-600 hover:bg-teal-50 rounded-md">
-                                                <Edit3 size={16} />
-                                            </button>
-                                        </div>
+                            {resources[indexState].length === 0 ? (
+                                // Empty state - show when array is empty
+                                <div className="grid grid-cols-10 h-24 gap-4 p-4 hover:bg-gray-50">
+                                    <div className="col-span-10 flex items-center justify-center">
+                                        <p className="text-gray-500 text-center">
+                                            No resource yet in this collection
+                                        </p>
                                     </div>
                                 </div>
-                            ))}
+                            ) : (
+                                // Map over resources when array has items
+                                resources[indexState].map((resource, index) => (
+                                    <div
+                                        key={index}
+                                        className="grid grid-cols-10 gap-4 p-4 hover:bg-gray-50"
+                                    >
+                                        <div className="col-span-3">
+                                            <span className="font-medium text-gray-900">
+                                                {resource.title}
+                                            </span>
+                                        </div>
+                                        <div className="col-span-6">
+                                            <p className="text-gray-600 w-lg">
+                                                {resource.content}
+                                            </p>
+                                        </div>
+                                        <div className="col-span-1">
+                                            <div className="flex space-x-2">
+                                                <button className="p-2 text-red-500 hover:bg-red-50 rounded-md">
+                                                    <ExternalLink size={16} />
+                                                </button>
+                                                <button className="p-2 text-teal-600 hover:bg-teal-50 rounded-md">
+                                                    <Edit3 size={16} />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
                         </div>
                     </div>
                 </div>

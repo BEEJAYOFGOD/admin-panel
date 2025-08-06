@@ -6,6 +6,7 @@ import DashboardLayout from "./layout/DashboardLayout";
 import Students from "./pages/Students";
 import Coaches from "./pages/Coaches";
 import Resources from "./pages/Resources";
+import Groups from "./pages/Groups";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route path="students" element={<Students />} />
                     <Route path="coaches" element={<Coaches />} />
                     <Route path="resources" element={<Resources />} />
+                    <Route path="groups" element={<Groups />} />
                 </Route>
             </Routes>
         </>

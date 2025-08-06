@@ -1,5 +1,13 @@
 import { useLocation, Link } from "react-router-dom";
-import { Users2, User } from "lucide-react";
+import {
+    Users2,
+    User,
+    User2Icon,
+    Users,
+    MessageCircleIcon,
+    MessageSquareIcon,
+    MessageSquare,
+} from "lucide-react";
 
 const Dashboard = () => {
     const location = useLocation();
@@ -51,7 +59,7 @@ const Dashboard = () => {
     return (
         <section className=" p-8 bg-outlet/30 min-h-full  ">
             <div className="flex h-fit w-full justify-between ">
-                <h2>Dashboard</h2>
+                <h2 className="font-semibold text-xl">Dashboard</h2>
                 <div>
                     <Link to={location.pathname}>
                         {location.pathname.split("").splice(1).join("")}
@@ -60,44 +68,51 @@ const Dashboard = () => {
             </div>
 
             <div className="grid grid-cols-2 grid-rows-2 my-8 gap-8">
+                {/* Active Students */}
+                <div className="flex justify-between  items-center shadow-sm p-8 bg-white rounded-md">
+                    <div>
+                        <p className="text-3xl font-bold">8</p>
+                        <p>Active Students</p>
+                    </div>
+
+                    <div className="bg-blue-300 flex items-center p-6 aspect-square justify-center rounded-md">
+                        <Users className="text-blue-700" />
+                    </div>
+                </div>
+
+                {/* Students */}
+                <div className="flex justify-between items-center shadow-sm p-8 bg-white rounded-md">
+                    <div>
+                        <p className="text-3xl font-bold">3</p>
+                        <p>Students</p>
+                    </div>
+
+                    <div className="flex justify-between items-center shadow-sm p-6  rounded-md bg-green-400/30">
+                        <Users className="text-green-700" />
+                    </div>
+                </div>
+
+                {/* Coaches */}
+                <div className="flex justify-between items-center shadow-sm p-8 bg-white rounded-md">
+                    <div>
+                        <p className="text-3xl font-bold">8</p>
+                        <p>Coaches</p>
+                    </div>
+
+                    <div className="bg-gray-300 flex p-6 items-center  rounded-md">
+                        <Users2 className="text-gray-500 inline border" />
+                    </div>
+                </div>
+
+                {/* Active Students */}
                 <div className="flex justify-between shadow-sm p-8 bg-white rounded-md">
                     <div>
                         <p className="text-3xl font-bold">8</p>
                         <p>Active Students</p>
                     </div>
 
-                    <div className="bg-blue-300 flex items-center p-4 rounded-md">
-                        <Users2 className="text-blue-700" />
-                    </div>
-                </div>
-                <div className="flex justify-between  shadow-sm p-8 bg-white rounded-md">
-                    <div>
-                        <p className="text-3xl font-bold">8</p>
-                        <p>Active Students</p>
-                    </div>
-
-                    <div>
-                        <Users2 />
-                    </div>
-                </div>
-                <div className="flex justify-between shadow-sm p-8 bg-white rounded-md">
-                    <div>
-                        <p className="text-3xl font-bold">8</p>
-                        <p>Active Students</p>
-                    </div>
-
-                    <div>
-                        <Users2 />
-                    </div>
-                </div>
-                <div className="flex justify-between shadow-sm p-8 bg-white rounded-md">
-                    <div>
-                        <p className="text-3xl font-bold">8</p>
-                        <p>Active Students</p>
-                    </div>
-
-                    <div>
-                        <Users2 />
+                    <div className="bg-red-200 flex p-6 items-center  rounded-md">
+                        <MessageSquare className="text-red-800" />
                     </div>
                 </div>
             </div>
