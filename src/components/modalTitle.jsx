@@ -1,6 +1,13 @@
 import { useEffect, useRef } from "react";
+import { X } from "lucide-react";
 
-const Modal = ({ isOpen, onClose, children }) => {
+const Modal = ({
+    isOpen,
+    onClose,
+    title,
+    children,
+    showCloseButton = true,
+}) => {
     const modalRef = useRef(null);
     const previousFocusRef = useRef(null);
 
@@ -82,7 +89,7 @@ const Modal = ({ isOpen, onClose, children }) => {
             onClick={handleOverlayClick}
             role="dialog"
             aria-modal="true"
-            aria-labelledby={"modal"}
+            aria-labelledby={title ? "modal-title" : undefined}
         >
             <div
                 ref={modalRef}
@@ -92,7 +99,30 @@ const Modal = ({ isOpen, onClose, children }) => {
                 onKeyDown={handleKeyDown}
                 tabIndex={-1}
             >
-                <div className="mx-8">{children}</div>
+                {(title || showCloseButton) && (
+                    <div className="flex items-center justify-between pt-4 px-4  pb-2 absolute right-0 top-0">
+                        {title && (
+                            <h2
+                                id="modal-title"
+                                className="text-lg font-semibold text-gray-900"
+                            >
+                                {title}
+                            </h2>
+                        )}
+                        {showCloseButton && (
+                            <button
+                                onClick={() => {
+                                    onClose();
+                                }}
+                                className="p-1 hover:bg-gray-100 ml-auto rounded-full transition-colors bg-graydark/20"
+                                aria-label="Close modal"
+                            >
+                                <X className="w-5 h-5 text-gray-500" />
+                            </button>
+                        )}
+                    </div>
+                )}
+                <div className="">{children}</div>
             </div>
         </div>
     );

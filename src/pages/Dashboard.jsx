@@ -126,7 +126,7 @@ const Dashboard = () => {
                         </h2>
                         <button
                             onClick={handleViewAll}
-                            className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                            className="bg-secondary hover:bg-teal-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
                         >
                             View all
                         </button>

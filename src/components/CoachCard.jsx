@@ -1,6 +1,6 @@
 import { User, MoreHorizontal } from "lucide-react";
 import { useState } from "react";
-import Modal from "./modal";
+import Modal from "./modalTitle";
 import CoachesStudent from "./CoachesStudent";
 
 const CoachCard = ({ coach }) => {

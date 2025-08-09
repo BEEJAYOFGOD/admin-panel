@@ -11,12 +11,16 @@ import {
     User,
     BellRingIcon,
     SettingsIcon,
+    ChevronRight,
+    ChevronDown,
 } from "lucide-react";
+import Modal from "./modal";
 
 export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     const [expandedSections, setExpandedSections] = useState({});
     const [isMobile, setIsMobile] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const location = useLocation();
 
     // Check if screen is mobile
@@ -61,7 +65,44 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
         }
     };
 
+    const offModal = () => {
+        setShowModal(false);
+    };
+
     // SVG icons as React components
+
+    const MenuIcon = ({ width }) => (
+        <svg
+            className={`w-${width} h-${width}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+        >
+            <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+            />
+        </svg>
+    );
+
+    const XIcon = ({ width }) => (
+        <svg
+            className={`w-${width} h-${width}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+        >
+            <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+            />
+        </svg>
+    );
+
     const menuItems = [
         {
             id: "core",
@@ -132,7 +173,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     ];
 
     return (
-        <>
+        <div className="overflow-y-auto overflow-clip">
             {/* Mobile Hamburger Menu Button */}
             {isMobile && (
                 <button
@@ -165,8 +206,12 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
             >
                 {/* Header */}
                 <div className="p-4">
-                    <div className="flex justify-between items-center">
-                        <div className="flex items-center space-x-3">
+                    <div
+                        className={`flex   items-center ${
+                            isCollapsed ? "justify-center" : "justify-between"
+                        }`}
+                    >
+                        <div className="flex items-center justify-between space-x-3">
                             {(!isCollapsed || isMobile) && (
                                 <>
                                     <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
@@ -188,14 +233,13 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                         {!isMobile && (
                             <button
                                 onClick={() => setIsCollapsed(!isCollapsed)}
-                                className="cursor-pointer border-none p-1 hover:bg-gray-100 rounded"
+                                className="cursor-pointer  p-1 hover:bg-gray-100 rounded"
                             >
-                                <ChevronRightIcon />
-                                <style jsx>{`
-                                    .rotate-180 {
-                                        transform: rotate(180deg);
-                                    }
-                                `}</style>
+                                <ChevronRight
+                                    className={`${
+                                        isCollapsed ? "rotate-180" : "rotate-0"
+                                    } text-blue-950 hover:opacity-60`}
+                                />
                             </button>
                         )}
 
@@ -220,20 +264,30 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                     {section.title}
                                 </h3>
                             )}
-                            <nav className="space-y-2">
+
+                            <nav className="space-y-4">
                                 {section.items.map((item, index) => (
                                     <div key={index}>
                                         {item.hasDropdown ? (
                                             <div>
                                                 <button
-                                                    onClick={() =>
-                                                        toggleSection(
-                                                            `${section.id}-${index}`
-                                                        )
-                                                    }
-                                                    className="w-full flex items-center space-x-3 px-3 py-3 rounded-lg text-left transition-colors text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                                                    onClick={() => {
+                                                        if (!isCollapsed) {
+                                                            toggleSection(
+                                                                `${section.id}-${index}`
+                                                            );
+
+                                                            return;
+                                                        } else if (showModal) {
+                                                            setShowModal(false);
+                                                            return;
+                                                        }
+                                                        setShowModal(true);
+                                                    }}
+                                                    className="w-full flex items-center space-x-3 px-3 justify-center py-3 rounded-lg text-left transition-colors text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                                                 >
                                                     <item.icon />
+
                                                     {(!isCollapsed ||
                                                         isMobile) && (
                                                         <>
@@ -249,9 +303,38 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                                                         : ""
                                                                 }`}
                                                             >
-                                                                <ChevronDownIcon />
+                                                                <ChevronDown />
                                                             </div>
                                                         </>
+                                                    )}
+
+                                                    {showModal && (
+                                                        <Modal
+                                                            onClose={offModal}
+                                                            isOpen={showModal}
+                                                        >
+                                                            <div className="m-3">
+                                                                Lorem ipsum
+                                                                dolor sit amet
+                                                                consectetur
+                                                                adipisicing
+                                                                elit. Asperiores
+                                                                iusto
+                                                                exercitationem,
+                                                                doloribus atque,
+                                                                labore quod iure
+                                                                excepturi
+                                                                facilis corporis
+                                                                impedit
+                                                                consequatur eius
+                                                                praesentium
+                                                                laboriosam
+                                                                consectetur
+                                                                omnis, nulla
+                                                                recusandae ipsa
+                                                                tempore.
+                                                            </div>
+                                                        </Modal>
                                                     )}
                                                 </button>
                                                 {/* Dropdown items */}
@@ -293,6 +376,11 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                                 to={item.path}
                                                 onClick={handleNavClick}
                                                 end
+                                                title={
+                                                    isCollapsed
+                                                        ? item.label
+                                                        : null
+                                                }
                                                 className={({ isActive }) =>
                                                     `md:w-full flex  items-center px-3  space-x-3 text-blue-950  py-3 rounded-lg transition-colors group    hover:text-gray-900 ${
                                                         isCollapsed
@@ -300,7 +388,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                                             : ""
                                                     } ${
                                                         isActive
-                                                            ? "bg-blue-200/60  ring-2 hover:bg-blue-200/90   ring-blue-400 "
+                                                            ? "bg-cyan-700/15 ring-2 hover:bg-cyan-700/20   ring-cyan-700 "
                                                             : "border-transparent hover:bg-gray-100 hover:ring-gray-100 hover:ring"
                                                     }`
                                                 }
@@ -339,6 +427,6 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                     </div>
                 )}
             </div>
-        </>
+        </div>
     );
 };

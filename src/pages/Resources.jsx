@@ -126,7 +126,7 @@ const Resources = () => {
                         >
                             <div className="flex items-center space-x-3">
                                 <div
-                                    className={`rounded-md p-3 bg-blue-400/30 flex items-center justify-center`}
+                                    className={`rounded-md p-3 bg-secondary/15 hover:bg-secondary/20 flex items-center justify-center`}
                                 >
                                     {index === indexState ? (
                                         <Check size={20} />
@@ -165,7 +165,7 @@ const Resources = () => {
 
                         {/* Table Header */}
                         {resources[indexState].length ? (
-                            <div className="grid grid-cols-10 gap-4 p-4 bg-blue-200 border-b border-gray-200 text-sm font-medium text-blue-900">
+                            <div className="grid grid-cols-10 gap-4 p-4 bg-secondary/15 border-b border-gray-200 text-sm font-medium text-blue-900">
                                 <div className="col-span-3">Title</div>
                                 <div className="col-span-6">Content</div>
                                 <div className="col-span-1">Actions</div>
