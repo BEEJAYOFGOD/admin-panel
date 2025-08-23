@@ -17,16 +17,7 @@ const DasboardLayout = () => {
                 setIsCollapsed={setIsCollapsed}
             />
             <div className="min-h-full overflow-auto">
-                <div className="flex border-b border-gray-300 p-3 z-10 justify-between sticky top-0 bg-white">
-                    <div className="flex gap-3 items-center border rounded-sm px-3  border-blue-500">
-                        <SearchIcon className="text-blue-500 w-6" />
-                        <input
-                            type="search"
-                            name="search"
-                            id=""
-                            className="my-auto p-2 focus:outline-0  border-blue-500"
-                        />
-                    </div>
+                <div className="flex border-b border-gray-300 p-3 z-10 justify-end sticky top-0 bg-white">
                     <div className="flex gap-6 items-center">
                         <div>
                             <div className="border rounded-full h-8 w-8"></div>

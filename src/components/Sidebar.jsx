@@ -74,24 +74,6 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     }, [showSettingsPopup]);
 
     // Close settings popup when clicking outside
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (
-                showSettingsPopup &&
-                settingsRef.current &&
-                !settingsRef.current.contains(event.target) &&
-                popupRef.current &&
-                !popupRef.current.contains(event.target)
-            ) {
-                setShowSettingsPopup(false);
-            }
-        };
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () =>
-            document.removeEventListener("mousedown", handleClickOutside);
-    }, [showSettingsPopup]);
-
     const toggleSection = (section) => {
         setExpandedSections((prev) => ({
             ...prev,
@@ -108,6 +90,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     const handleSettingsClick = (sectionId, index) => {
         if (!isCollapsed) {
             toggleSection(`${sectionId}-${index}`);
+            setShowSettingsPopup(false);
         } else {
             setShowSettingsPopup(!showSettingsPopup);
         }
@@ -116,10 +99,6 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     const handleSettingsSubItemClick = () => {
         setShowSettingsPopup(false);
         handleNavClick();
-    };
-
-    const offModal = () => {
-        setShowModal(false);
     };
 
     // SVG icons as React components
@@ -225,7 +204,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     ];
 
     return (
-        <div className="overflow-y-auto overflow-clip  shadow ">
+        <div className="overflow-y-auto overflow-clip  shadow-xs border scrollbar-shiny">
             {/* Mobile Hamburger Menu Button */}
             {isMobile && (
                 <button
@@ -335,7 +314,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                                             index
                                                         );
                                                     }}
-                                                    className="w-full flex items-center space-x-3 px-3 justify-center py-3 rounded-lg text-left transition-colors text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                                                    className="w-full flex items-center space-x-3 px-3 justify-center py-3 text-blue-950 rounded-lg text-left transition-colors hover:bg-gray-50 hover:text-gray-900"
                                                 >
                                                     <item.icon />
 
@@ -395,7 +374,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                                     )}
 
                                                 {/* Popup dropdown for collapsed sidebar */}
-                                                {!showSettingsPopup &&
+                                                {showSettingsPopup &&
                                                     !isCollapsed &&
                                                     !isMobile &&
                                                     item.label === "Settings" &&
