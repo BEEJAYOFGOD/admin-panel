@@ -131,7 +131,6 @@
         @apply bg-background text-foreground;
     }
 }
-
 @layer utilities {
     .scrollbar-shiny {
         /* Firefox */

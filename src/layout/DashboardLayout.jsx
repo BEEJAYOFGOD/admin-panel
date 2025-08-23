@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Sidebar } from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
 import { SearchIcon } from "lucide-react";
@@ -6,6 +6,37 @@ import { MoonIcon, MoonStarIcon } from "lucide-react";
 
 const DasboardLayout = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    // Handle click outside and escape key
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        const handleEscapeKey = (event) => {
+            if (event.key === "Escape") {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        if (isDropdownOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+            document.addEventListener("keydown", handleEscapeKey);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("keydown", handleEscapeKey);
+        };
+    }, [isDropdownOpen]);
+
     return (
         <section
             className={`grid h-screen z-99 ${
@@ -18,9 +49,44 @@ const DasboardLayout = () => {
             />
             <div className="min-h-full overflow-auto">
                 <div className="flex border-b border-gray-300 p-3 z-10 justify-end sticky top-0 bg-white">
-                    <div className="flex gap-6 items-center">
+                    {/* user avatar */}
+
+                    <div
+                        className="flex gap-6 items-center border relative "
+                        ref={dropdownRef}
+                    >
                         <div>
-                            <div className="border rounded-full h-8 w-8"></div>
+                            <div
+                                className="border rounded-full h-10 w-10 bg-gray-200 cursor-pointer"
+                                onClick={() =>
+                                    setIsDropdownOpen(!isDropdownOpen)
+                                }
+                            ></div>
+
+                            {/* Dropdown Menu */}
+                            {isDropdownOpen && (
+                                <div className="absolute right-0 top-14 bg-white border border-gray-300 rounded-md shadow-lg py-1 w-48 z-20">
+                                    <button
+                                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        onClick={() => setIsDropdownOpen(false)}
+                                    >
+                                        My Account
+                                    </button>
+                                    <button
+                                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        onClick={() => setIsDropdownOpen(false)}
+                                    >
+                                        Settings
+                                    </button>
+                                    <hr className="border-gray-200 my-1" />
+                                    <button
+                                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                        onClick={() => setIsDropdownOpen(false)}
+                                    >
+                                        Logout
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

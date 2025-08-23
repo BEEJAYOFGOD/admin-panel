@@ -195,7 +195,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                             label: "General Settings",
                             path: "/settings/general",
                         },
-                        { label: "Security", path: "/settings/security" },
+                        { label: "FAQs", path: "/settings/FAQ" },
                     ],
                 },
                 { icon: BadgeHelp, label: "Support", path: "/support" },
@@ -290,12 +290,6 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                 <div className="p-4 space-y-6 overflow-y-auto">
                     {menuItems.map((section) => (
                         <div key={section.id}>
-                            {(!isCollapsed || isMobile) && (
-                                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
-                                    {section.title}
-                                </h3>
-                            )}
-
                             <nav className="space-y-4">
                                 {section.items.map((item, index) => (
                                     <div key={index} className="relative">
@@ -362,11 +356,9 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                                                         onClick={
                                                                             handleNavClick
                                                                         }
-                                                                        className="block text-sm border w-full text-left px-3 py-2 rounded transition-colors text-gray-600 hover:text-gray-900 hover:bg-gray-50 bg-gray-100"
+                                                                        className="block text-sm  w-full text-left px-3 py-2 rounded transition-colors text-gray-600 hover:text-gray-900 hover:bg-gray-50 "
                                                                     >
-                                                                        {
-                                                                            subItem.label
-                                                                        }
+                                                                        {`- ${subItem.label}`}
                                                                     </NavLink>
                                                                 )
                                                             )}
@@ -495,13 +487,13 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                 )}
 
                 {/* Bottom branding */}
-                {(!isCollapsed || isMobile) && (
+                {/* {(!isCollapsed || isMobile) && (
                     <div className="absolute bottom-4 left-4">
                         <div className="bg-blue-600 text-white px-3 py-1 rounded text-xs font-medium">
                             TheYunion
                         </div>
                     </div>
-                )}
+                )} */}
             </div>
 
             {/* Add CSS for fade-in animation */}
