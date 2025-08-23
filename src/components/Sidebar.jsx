@@ -420,7 +420,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                                         isCollapsed
                                                             ? "justify-center"
                                                             : ""
-                                                    } ${
+                                                    }  ${
                                                         isActive
                                                             ? "bg-cyan-700/15 ring-2 hover:bg-cyan-700/20 ring-cyan-700"
                                                             : "border-transparent hover:bg-gray-100 hover:ring-gray-100 hover:ring"

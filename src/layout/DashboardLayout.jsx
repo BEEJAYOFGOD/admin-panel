@@ -47,6 +47,7 @@ const DasboardLayout = () => {
                 isCollapsed={isCollapsed}
                 setIsCollapsed={setIsCollapsed}
             />
+
             <div className="min-h-full overflow-auto">
                 <div className="flex border-b border-gray-300 p-3 z-10 justify-end sticky top-0 bg-white">
                     {/* user avatar */}

@@ -171,4 +171,7 @@
     .scrollbar-shiny::-webkit-scrollbar-corner {
         background: #f1f1f1;
     }
+    button {
+        cursor: pointer;
+    }
 }

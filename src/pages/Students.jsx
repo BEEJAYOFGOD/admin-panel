@@ -174,7 +174,7 @@ const Students = () => {
     };
 
     return (
-        <div className="w-full min-h-full bg-gray-50 mx-auto p-6">
+        <div className="w-full min-h-full bg-outlet/30  mx-auto p-8">
             <div className="bg-white rounded-lg">
                 {/* Header */}
                 <div className="flex justify-between items-center">

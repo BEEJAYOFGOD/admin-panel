@@ -8,6 +8,7 @@ import Coaches from "./pages/Coaches";
 import Resources from "./pages/Resources";
 import Groups from "./pages/Groups";
 import Programs from "./pages/Programs";
+import Avatars from "./pages/avatar";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                     <Route path="resources" element={<Resources />} />
                     <Route path="groups" element={<Groups />} />
                     <Route path="programs" element={<Programs />} />
+                    <Route path="avatars" element={<Avatars />} />
                 </Route>
             </Routes>
         </>
