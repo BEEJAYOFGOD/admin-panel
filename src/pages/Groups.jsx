@@ -15,12 +15,12 @@ const Groups = () => {
     ];
     return (
         <main className="bg-outlet/40 p-10 h-full">
-            <div>
+            <div className="flex justify-between">
                 <h2>LyfeGroups</h2>
                 <p>breadcumb</p>
             </div>
 
-            <div className="flex">
+            <div className="flex mt-8">
                 <button className="bg-secondary rounded-md ml-auto px-8 py-3 text-white">
                     Create New Group
                 </button>

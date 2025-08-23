@@ -30,12 +30,12 @@ const Programs = () => {
     ];
     return (
         <main className="bg-outlet/40 min-h-full p-12">
-            <div>
-                <h2>Programs</h2>
-                <span>{`TheYunion '>' Program`}</span>
+            <div className="flex justify-between">
+                <h2 className="text-2xl font-bold">Programs</h2>
+                <span>{`TheYunion > Program`}</span>
             </div>
 
-            <div className="flex">
+            <div className="flex mt-8">
                 <button className="ml-auto border bg-secondary px-6 py-3 rounded-md text-white">
                     Add New Program
                 </button>
@@ -67,13 +67,15 @@ const Programs = () => {
                                     {program.description}
                                 </td>
 
-                                <td className="text-left py-3 px-6  font-medium text-primary flex gap-4">
-                                    <button className="bg-secondary/20 p-3 rounded-md ">
-                                        <Edit2Icon className="w-6 h-6" />
-                                    </button>
-                                    <button className="bg-red-200 p-3 rounded-md ">
-                                        <Trash2Icon className="w-6 h-6 text-red-800" />
-                                    </button>
+                                <td className="text-left py-3 px-6  font-medium text-primary">
+                                    <div className=" flex items-center gap-4">
+                                        <button className="bg-secondary/20 p-3 rounded-md ">
+                                            <Edit2Icon className="w-6 h-6" />
+                                        </button>
+                                        <button className="bg-red-200 p-3 rounded-md ">
+                                            <Trash2Icon className="w-6 h-6 text-red-800" />
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

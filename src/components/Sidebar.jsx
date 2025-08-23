@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
     Users,
@@ -20,8 +20,10 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     const [expandedSections, setExpandedSections] = useState({});
     const [isMobile, setIsMobile] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [showModal, setShowModal] = useState(false);
+    const [showSettingsPopup, setShowSettingsPopup] = useState(false);
     const location = useLocation();
+    const settingsRef = useRef(null);
+    const popupRef = useRef(null);
 
     // Check if screen is mobile
     useEffect(() => {
@@ -52,6 +54,44 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
             document.removeEventListener("mousedown", handleOutsideClick);
     }, [isMobile, mobileMenuOpen]);
 
+    // Close settings popup when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                showSettingsPopup &&
+                settingsRef.current &&
+                !settingsRef.current.contains(event.target) &&
+                popupRef.current &&
+                !popupRef.current.contains(event.target)
+            ) {
+                setShowSettingsPopup(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () =>
+            document.removeEventListener("mousedown", handleClickOutside);
+    }, [showSettingsPopup]);
+
+    // Close settings popup when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                showSettingsPopup &&
+                settingsRef.current &&
+                !settingsRef.current.contains(event.target) &&
+                popupRef.current &&
+                !popupRef.current.contains(event.target)
+            ) {
+                setShowSettingsPopup(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () =>
+            document.removeEventListener("mousedown", handleClickOutside);
+    }, [showSettingsPopup]);
+
     const toggleSection = (section) => {
         setExpandedSections((prev) => ({
             ...prev,
@@ -65,12 +105,24 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
         }
     };
 
+    const handleSettingsClick = (sectionId, index) => {
+        if (!isCollapsed) {
+            toggleSection(`${sectionId}-${index}`);
+        } else {
+            setShowSettingsPopup(!showSettingsPopup);
+        }
+    };
+
+    const handleSettingsSubItemClick = () => {
+        setShowSettingsPopup(false);
+        handleNavClick();
+    };
+
     const offModal = () => {
         setShowModal(false);
     };
 
     // SVG icons as React components
-
     const MenuIcon = ({ width }) => (
         <svg
             className={`w-${width} h-${width}`}
@@ -173,7 +225,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     ];
 
     return (
-        <div className="overflow-y-auto overflow-clip">
+        <div className="overflow-y-auto overflow-clip  shadow ">
             {/* Mobile Hamburger Menu Button */}
             {isMobile && (
                 <button
@@ -194,7 +246,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
 
             {/* Sidebar */}
             <div
-                className={`sidebar-container bg-white  transition-all duration-300 ${
+                className={`sidebar-container bg-white transition-all duration-300 ${
                     isMobile
                         ? `fixed top-0 left-0 h-full z-50 transform ${
                               mobileMenuOpen
@@ -207,7 +259,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                 {/* Header */}
                 <div className="p-4">
                     <div
-                        className={`flex   items-center ${
+                        className={`flex items-center ${
                             isCollapsed ? "justify-center" : "justify-between"
                         }`}
                     >
@@ -233,7 +285,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                         {!isMobile && (
                             <button
                                 onClick={() => setIsCollapsed(!isCollapsed)}
-                                className="cursor-pointer  p-1 hover:bg-gray-100 rounded"
+                                className="cursor-pointer p-1 hover:bg-gray-100 rounded"
                             >
                                 <ChevronRight
                                     className={`${
@@ -267,22 +319,21 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
 
                             <nav className="space-y-4">
                                 {section.items.map((item, index) => (
-                                    <div key={index}>
+                                    <div key={index} className="relative">
                                         {item.hasDropdown ? (
                                             <div>
                                                 <button
+                                                    ref={
+                                                        item.label ===
+                                                        "Settings"
+                                                            ? settingsRef
+                                                            : null
+                                                    }
                                                     onClick={() => {
-                                                        if (!isCollapsed) {
-                                                            toggleSection(
-                                                                `${section.id}-${index}`
-                                                            );
-
-                                                            return;
-                                                        } else if (showModal) {
-                                                            setShowModal(false);
-                                                            return;
-                                                        }
-                                                        setShowModal(true);
+                                                        handleSettingsClick(
+                                                            section.id,
+                                                            index
+                                                        );
                                                     }}
                                                     className="w-full flex items-center space-x-3 px-3 justify-center py-3 rounded-lg text-left transition-colors text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                                                 >
@@ -307,37 +358,9 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                                             </div>
                                                         </>
                                                     )}
-
-                                                    {showModal && (
-                                                        <Modal
-                                                            onClose={offModal}
-                                                            isOpen={showModal}
-                                                        >
-                                                            <div className="m-3">
-                                                                Lorem ipsum
-                                                                dolor sit amet
-                                                                consectetur
-                                                                adipisicing
-                                                                elit. Asperiores
-                                                                iusto
-                                                                exercitationem,
-                                                                doloribus atque,
-                                                                labore quod iure
-                                                                excepturi
-                                                                facilis corporis
-                                                                impedit
-                                                                consequatur eius
-                                                                praesentium
-                                                                laboriosam
-                                                                consectetur
-                                                                omnis, nulla
-                                                                recusandae ipsa
-                                                                tempore.
-                                                            </div>
-                                                        </Modal>
-                                                    )}
                                                 </button>
-                                                {/* Dropdown items */}
+
+                                                {/* Regular dropdown for expanded sidebar */}
                                                 {expandedSections[
                                                     `${section.id}-${index}`
                                                 ] &&
@@ -354,13 +377,53 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                                                         key={
                                                                             subIndex
                                                                         }
-                                                                        href={
+                                                                        to={
                                                                             subItem.path
                                                                         }
                                                                         onClick={
                                                                             handleNavClick
                                                                         }
-                                                                        className="block text-sm border w-full text-left px-3 py-2  rounded transition-colors text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+                                                                        className="block text-sm border w-full text-left px-3 py-2 rounded transition-colors text-gray-600 hover:text-gray-900 hover:bg-gray-50 bg-gray-100"
+                                                                    >
+                                                                        {
+                                                                            subItem.label
+                                                                        }
+                                                                    </NavLink>
+                                                                )
+                                                            )}
+                                                        </div>
+                                                    )}
+
+                                                {/* Popup dropdown for collapsed sidebar */}
+                                                {!showSettingsPopup &&
+                                                    !isCollapsed &&
+                                                    !isMobile &&
+                                                    item.label === "Settings" &&
+                                                    item.subItems && (
+                                                        <div
+                                                            ref={popupRef}
+                                                            className="absolute left-full top-0 ml-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50 py-1"
+                                                            style={{
+                                                                animation:
+                                                                    "fadeIn 0.15s ease-out",
+                                                            }}
+                                                        >
+                                                            {item.subItems.map(
+                                                                (
+                                                                    subItem,
+                                                                    subIndex
+                                                                ) => (
+                                                                    <NavLink
+                                                                        key={
+                                                                            subIndex
+                                                                        }
+                                                                        to={
+                                                                            subItem.path
+                                                                        }
+                                                                        onClick={
+                                                                            handleSettingsSubItemClick
+                                                                        }
+                                                                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors"
                                                                     >
                                                                         {
                                                                             subItem.label
@@ -382,19 +445,19 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                                         : null
                                                 }
                                                 className={({ isActive }) =>
-                                                    `md:w-full flex  items-center px-3  space-x-3 text-blue-950  py-3 rounded-lg transition-colors group    hover:text-gray-900 ${
+                                                    `md:w-full flex items-center px-3 space-x-3 text-blue-950 py-3 rounded-lg transition-colors group hover:text-gray-900 ${
                                                         isCollapsed
                                                             ? "justify-center"
                                                             : ""
                                                     } ${
                                                         isActive
-                                                            ? "bg-cyan-700/15 ring-2 hover:bg-cyan-700/20   ring-cyan-700 "
+                                                            ? "bg-cyan-700/15 ring-2 hover:bg-cyan-700/20 ring-cyan-700"
                                                             : "border-transparent hover:bg-gray-100 hover:ring-gray-100 hover:ring"
                                                     }`
                                                 }
                                             >
                                                 <item.icon
-                                                    className={` ${
+                                                    className={`${
                                                         isCollapsed
                                                             ? "mx-auto"
                                                             : ""
@@ -418,6 +481,40 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                     ))}
                 </div>
 
+                {/* Settings Popup Menu - Outside Sidebar */}
+                {showSettingsPopup && isCollapsed && !isMobile && (
+                    <div
+                        ref={popupRef}
+                        className="fixed bg-white border border-gray-200 rounded-lg shadow-xl z-50 py-2 min-w-48"
+                        style={{
+                            left: `${isCollapsed ? 96 : 256}px`, // Position based on sidebar width
+                            top: settingsRef.current
+                                ? settingsRef.current.getBoundingClientRect()
+                                      .top + window.scrollY
+                                : "auto",
+                        }}
+                    >
+                        <div className="px-3 py-1">
+                            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                                Settings
+                            </p>
+                        </div>
+                        {menuItems
+                            .find((section) => section.id === "general")
+                            ?.items.find((item) => item.label === "Settings")
+                            ?.subItems?.map((subItem, subIndex) => (
+                                <NavLink
+                                    key={subIndex}
+                                    to={subItem.path}
+                                    onClick={handleSettingsSubItemClick}
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                                >
+                                    {subItem.label}
+                                </NavLink>
+                            ))}
+                    </div>
+                )}
+
                 {/* Bottom branding */}
                 {(!isCollapsed || isMobile) && (
                     <div className="absolute bottom-4 left-4">
@@ -427,6 +524,20 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                     </div>
                 )}
             </div>
+
+            {/* Add CSS for fade-in animation */}
+            <style jsx>{`
+                @keyframes fadeIn {
+                    from {
+                        opacity: 0;
+                        transform: translateX(-10px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+            `}</style>
         </div>
     );
 };
