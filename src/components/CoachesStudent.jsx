@@ -2,7 +2,7 @@ const CoachesStudent = ({ students }) => {
     return (
         <div className="rounded-md w-2xl">
             <h1 className="border-b border-gray-200/30 p-4">Student list</h1>
-            <div className="p-4 space-y-4 h-[300px] overflow-auto">
+            <div className="p-4 space-y-4 h-[300px] overflow-auto scrollbar-shiny">
                 {students.map((student) => (
                     <article className="flex items-center gap-3">
                         <img

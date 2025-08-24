@@ -204,7 +204,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     ];
 
     return (
-        <div className="overflow-y-auto overflow-clip  shadow-xs border scrollbar-shiny">
+        <aside className="overflow-y-auto overflow-clip  shadow  z-20 scrollbar-shiny">
             {/* Mobile Hamburger Menu Button */}
             {isMobile && (
                 <button
@@ -236,7 +236,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                 }`}
             >
                 {/* Header */}
-                <div className="p-4">
+                <div className="p-4 md:sticky  top-0 bg-white z-10">
                     <div
                         className={`flex items-center ${
                             isCollapsed ? "justify-center" : "justify-between"
@@ -509,6 +509,6 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                     }
                 }
             `}</style>
-        </div>
+        </aside>
     );
 };
