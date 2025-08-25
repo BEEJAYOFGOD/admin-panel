@@ -39,7 +39,7 @@ const DasboardLayout = () => {
 
     return (
         <section
-            className={`grid h-screen z-99 ${
+            className={`md:grid h-screen z-99 ${
                 isCollapsed ? "grid-cols-[auto_2fr]" : "grid-cols-[200px_2fr]"
             }`}
         >

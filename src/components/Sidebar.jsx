@@ -204,7 +204,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     ];
 
     return (
-        <aside className="overflow-y-auto overflow-clip  shadow  z-20 scrollbar-shiny">
+        <aside className="overflow-y-auto overflow-clip hidden shadow  z-20 scrollbar-shiny md:flex">
             {/* Mobile Hamburger Menu Button */}
             {isMobile && (
                 <button
