@@ -48,8 +48,8 @@ const DasboardLayout = () => {
                 setIsCollapsed={setIsCollapsed}
             />
 
-            <div className="min-h-full overflow-auto">
-                <div className="flex  border-gray-300 p-3 z-10 justify-end sticky top-0 bg-white">
+            <div className="min-h-full">
+                <div className="flex  border-gray-300 p-3 z-10 justify-end  top-0 sticky bg-white">
                     {/* user avatar */}
 
                     <div

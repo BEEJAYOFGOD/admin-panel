@@ -170,7 +170,7 @@ const Coaches = () => {
         },
     ];
     return (
-        <main className="p-8 p bg-outlet/30  min-h-full">
+        <main className="p-8 p bg-outlet/30  min-h-full ">
             <h2 className="text-3xl mb-8 font-bold">Coaches</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2    lg:grid-cols-5 gap-8 min-h-full">
