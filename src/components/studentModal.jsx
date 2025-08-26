@@ -189,7 +189,7 @@ export const StudentModal = ({ isOpen, onClose, student, onSave }) => {
         >
             <div
                 ref={modalRef}
-                className="relative bg-white rounded-md shadow-2xl mx-4 min-w-3xl max-w-md   max-h-[90vh] overflow-hidden"
+                className="relative bg-white rounded-md shadow-2xl mx-4 md:w-3xl w-md   max-h-[90vh] overflow-hidden"
                 onClick={(e) => e.stopPropagation()}
                 onKeyDown={handleKeyDown}
                 tabIndex={-1}
@@ -307,8 +307,10 @@ export const StudentModal = ({ isOpen, onClose, student, onSave }) => {
                             Status
                         </label>
 
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 ">
                             <Switch
+                                checkedColor="bg-cyan-900" // Convert bg-blue-550 to hex
+                                uncheckedColor="bg-gray-200" // Convert bg-gray-200 to hex
                                 onCheckedChange={(checked) => {
                                     setFormData({
                                         ...formData,
@@ -318,8 +320,6 @@ export const StudentModal = ({ isOpen, onClose, student, onSave }) => {
                                 checked={
                                     formData.status.toLowerCase() === "active"
                                 }
-                                checkedColor="bg-blue-950"
-                                uncheckedColor="bg-gray-200"
                             />
                             <span className="lowercase">{formData.status}</span>
                         </div>

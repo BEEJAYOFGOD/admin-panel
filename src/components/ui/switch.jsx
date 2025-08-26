@@ -16,7 +16,7 @@ function Switch({
         <SwitchPrimitive.Root
             className={cn(
                 `peer inline-flex h-6 w-10 shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 focus-visible:border-ring focus-visible:ring-ring/50`,
-                `data-[state=checked]:${checkedColor} data-[state=unchecked]:${uncheckedColor}`,
+                `data-[state=checked]:bg-cyan-900 data-[state=unchecked]:bg-gray-200`,
                 `dark:data-[state=unchecked]:bg-input/80`,
                 className
             )}
