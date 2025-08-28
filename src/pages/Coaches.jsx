@@ -173,7 +173,7 @@ const Coaches = () => {
         <main className="md:p-8 p-4 bg-outlet/30  min-h-full ">
             <h2 className="text-3xl mb-8 font-bold">Coaches</h2>
 
-            <div className="grid sm:grid-cols-2  gap-4  lg:grid-cols-5 md:gap-8 min-h-full">
+            <div className="grid grid-cols-2  gap-4  lg:grid-cols-5 md:gap-8 min-h-full">
                 {coaches.map((coach) => (
                     <CoachCard coach={coach} />
                 ))}
