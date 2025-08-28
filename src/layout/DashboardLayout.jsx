@@ -10,6 +10,7 @@ const DasboardLayout = () => {
 
     // Handle click outside and escape key
     useEffect(() => {
+        // This is meant for the profile drop down
         const handleClickOutside = (event) => {
             if (
                 dropdownRef.current &&

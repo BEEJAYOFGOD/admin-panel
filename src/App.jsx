@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Login from "./auth/login";
-import Dashboard from "./pages/dashboard";
+import Dashboard from "./pages/Dashboard";
 import DashboardLayout from "./layout/DashboardLayout";
 import Students from "./pages/Students";
 import Coaches from "./pages/Coaches";
