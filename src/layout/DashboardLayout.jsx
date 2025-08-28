@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Sidebar } from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
-import { SearchIcon } from "lucide-react";
-import { MoonIcon, MoonStarIcon } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const DasboardLayout = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -39,7 +38,7 @@ const DasboardLayout = () => {
 
     return (
         <section
-            className={`md:grid h-screen z-99 ${
+            className={`md:grid border   h-screen z-99 ${
                 isCollapsed ? "grid-cols-[auto_2fr]" : "grid-cols-[200px_2fr]"
             }`}
         >
@@ -48,8 +47,8 @@ const DasboardLayout = () => {
                 setIsCollapsed={setIsCollapsed}
             />
 
-            <div className="min-h-full">
-                <div className="flex  border-gray-300 p-3 z-10 justify-end  top-0 sticky bg-white">
+            <div className="md:max-h-screen overflow-y-scroll">
+                <div className="flex  border-gray-300 p-3 z-10 justify-end  md:top-0 md:sticky fixed right-0 w-full bg-white">
                     {/* user avatar */}
 
                     <div
@@ -92,7 +91,9 @@ const DasboardLayout = () => {
                     </div>
                 </div>
 
-                <Outlet />
+                <div className="md:pt-0 pt-16">
+                    <Outlet />
+                </div>
             </div>
         </section>
     );

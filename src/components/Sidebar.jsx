@@ -13,6 +13,7 @@ import {
     SettingsIcon,
     ChevronRight,
     ChevronDown,
+    Menu,
 } from "lucide-react";
 import Modal from "./modal";
 
@@ -21,7 +22,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     const [isMobile, setIsMobile] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [showSettingsPopup, setShowSettingsPopup] = useState(false);
-    const location = useLocation();
+    // const location = useLocation();
     const settingsRef = useRef(null);
     const popupRef = useRef(null);
 
@@ -46,6 +47,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                 !event.target.closest(".sidebar-container")
             ) {
                 setMobileMenuOpen(false);
+                document.body.classList.remove("overflow-hidden");
             }
         };
 
@@ -204,22 +206,25 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     ];
 
     return (
-        <aside className="overflow-y-auto overflow-clip hidden shadow  z-20 scrollbar-shiny md:flex">
+        <aside className="overflow-y-auto overflow-clip  shadow  z-20 scrollbar-shiny">
             {/* Mobile Hamburger Menu Button */}
             {isMobile && (
                 <button
-                    onClick={() => setMobileMenuOpen(true)}
-                    className="fixed top-4 left-4 z-50 md:hidden bg-white border border-gray-200 rounded-lg p-2 shadow-lg"
+                    onClick={() => {
+                        setMobileMenuOpen(true);
+                        document.body.classList.add("overflow-hidden");
+                    }}
+                    className="fixed top-2 left-4 z-50 md:hidden bg-white border border-gray-200 rounded-lg p-2 shadow-lg"
                 >
-                    <MenuIcon />
+                    <Menu />
                 </button>
             )}
 
             {/* Overlay for mobile */}
             {isMobile && mobileMenuOpen && (
                 <div
-                    className="fixed inset-0 bg-black/50 bg-opacity-50 z-40 md:hidden"
-                    onClick={() => setMobileMenuOpen(false)}
+                    className="fixed inset-0 right-0 bg-black/50 bg-opacity-50 z-40 md:hidden"
+                    onClick={() => {}}
                 />
             )}
 
@@ -278,7 +283,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                         {isMobile && (
                             <button
                                 onClick={() => setMobileMenuOpen(false)}
-                                className="p-1 hover:bg-gray-100 rounded"
+                                className="p-1 absolute top-12 right-0 border hover:bg-gray-100 rounded"
                             >
                                 <XIcon />
                             </button>

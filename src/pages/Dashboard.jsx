@@ -57,7 +57,7 @@ const Dashboard = () => {
     };
 
     return (
-        <section className=" p-8 bg-outlet/30 min-h-full  ">
+        <section className=" p-8 bg-outlet/30  ">
             <div className="flex h-fit w-full justify-between ">
                 <h2 className="font-semibold text-xl">Dashboard</h2>
                 <div>
@@ -67,7 +67,7 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 grid-rows-2 my-8 gap-8">
+            <div className="grid md:grid-cols-2 md:grid-rows-2 my-8 gap-8">
                 {/* Active Students */}
                 <div className="flex justify-between  items-center shadow-sm p-8 bg-white rounded-md">
                     <div>

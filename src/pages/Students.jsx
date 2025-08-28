@@ -242,7 +242,7 @@ const Students = () => {
                     <table className="w-full overflow-auto ">
                         <thead className="">
                             <tr>
-                                <th className="px-6 py-3 text-left">
+                                {/* <th className="px-6 py-3 text-left">
                                     <input
                                         type="checkbox"
                                         checked={
@@ -253,7 +253,7 @@ const Students = () => {
                                         onChange={handleSelectAll}
                                         className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                                     />
-                                </th>
+                                </th> */}
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Student
                                 </th>
@@ -278,7 +278,7 @@ const Students = () => {
                                     key={student.id}
                                     className="transition-colors odd:bg-gray-50  "
                                 >
-                                    <td className="px-6 py-4">
+                                    {/* <td className="px-6 py-4">
                                         <input
                                             type="checkbox"
                                             checked={selectedStudents.includes(
@@ -292,7 +292,7 @@ const Students = () => {
                                             }
                                             className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                                         />
-                                    </td>
+                                    </td> */}
                                     <td className="px-6 py-4">
                                         <div className="flex items-center">
                                             <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-sm mr-3">
