@@ -37,19 +37,19 @@ const CoachCard = ({ coach }) => {
             </div>
 
             {/* User Name */}
-            <h3 className="text-center font-semibold text-gray-900 mb-1">
+            <h3 className="text-center  font-semibold text-gray-900 mb-1">
                 {coach.name}
             </h3>
 
             {/* Username */}
-            <p className="text-center text-sm text-gray-500 mb-3">
+            <p className="text-center text-xs text-gray-500 mb-3">
                 @{coach.username}
             </p>
 
             {/* Email */}
             <div className="text-center mb-4">
                 <p
-                    className="text-xs text-gray-600 truncate"
+                    className="text-xs text-gray-600 truncate text-wrap"
                     title={coach.email}
                 >
                     {coach.email}
@@ -62,7 +62,7 @@ const CoachCard = ({ coach }) => {
                     onClick={() => {
                         setModalOpen(true);
                     }}
-                    className="bg-cyan-700 px-6 py-2 rounded-md text-white"
+                    className="bg-cyan-700 px-6 py-2 md:text-base text-sm rounded-md text-white"
                 >
                     View Students
                 </button>
