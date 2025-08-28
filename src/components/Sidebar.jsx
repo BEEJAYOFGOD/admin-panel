@@ -237,7 +237,7 @@ export const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                   ? "translate-x-0"
                                   : "-translate-x-full"
                           } w-64`
-                        : `relative ${isCollapsed ? "w-24" : "w-64"}`
+                        : `relative ${isCollapsed ? "md:w-24" : "w-64"}`
                 }`}
             >
                 {/* Header */}
